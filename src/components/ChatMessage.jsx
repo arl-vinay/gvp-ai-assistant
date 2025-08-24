@@ -2,13 +2,9 @@ import { motion } from "framer-motion";
 import { Bot, User } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
-interface ChatMessageProps {
-  message: string;
-  isBot: boolean;
-  timestamp?: string;
-}
+// Props: message, isBot, timestamp (optional)
 
-const ChatMessage = ({ message, isBot, timestamp }: ChatMessageProps) => {
+const ChatMessage = ({ message, isBot, timestamp }) => {
   return (
     <motion.div
       className={`flex gap-4 mb-6 ${isBot ? 'justify-start' : 'justify-end'}`}

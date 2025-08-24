@@ -10,12 +10,7 @@ import TypingIndicator from "@/components/TypingIndicator";
 import Navbar from "@/components/Navbar";
 import FloatingParticles from "@/components/FloatingParticles";
 
-interface Message {
-  id: string;
-  content: string;
-  isBot: boolean;
-  timestamp: string;
-}
+// Message shape: { id, content, isBot, timestamp }
 
 const mockResponses = [
   "I'm here to help you with your development projects! What would you like to build today?",
@@ -27,7 +22,7 @@ const mockResponses = [
 ];
 
 const Index = () => {
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState([
     {
       id: "1",
       content: "Hello! I'm your GVP Assistant. I'm here to help students and developers with their projects. How can I assist you today?",
@@ -37,7 +32,7 @@ const Index = () => {
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef(null);
 
   // Load chat history from localStorage
   useEffect(() => {
@@ -62,7 +57,7 @@ const Index = () => {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const userMessage: Message = {
+    const userMessage = {
       id: Date.now().toString(),
       content: input,
       isBot: false,
@@ -75,7 +70,7 @@ const Index = () => {
 
     // Simulate API call
     setTimeout(() => {
-      const botResponse: Message = {
+      const botResponse = {
         id: (Date.now() + 1).toString(),
         content: mockResponses[Math.floor(Math.random() * mockResponses.length)],
         isBot: true,
@@ -87,7 +82,7 @@ const Index = () => {
     }, 2000);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
